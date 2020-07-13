@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MarkDown</title>
+    <link rel="stylesheet" href="css/layout.css"/>
+    <script src="scripts/vue.js"></script>
+  </head>
+  <body>
+   <div class="container" id="app">
+    <header>
+      <h2>MarkDown</h2>
+    </header>
+    <main>
+      <nav>
+        <button @click="addNote">Add Note</button>
+        <ul>
+          <li v-for="note in sortedList" @click="IdSelected(note)" :class="{selected: note.id === selectId}"><p>{{note.title}}</p><span v-show="note.favorite" class="favorite"><em>star</em><span></li>
+        </ul>
+      </nav>
+      <template v-if="selectedNote">
+      <div class="writepad">
+        <div class="toolbar">
+          <input type="text" class="bar-input" placeholder="Note title" v-model="selectedNote.title"/>
+          <button class="bar-remove" @click="removenote">Remove</button>
+          <button class="bar-favorite" @click="favoritechange">Favorite</button>
+        </div>
+        <textarea v-model="selectedNote.content"></textarea>
+        <footer class="noteinfo"><p>{{info}}</p></footer>
+      </div>
+      <aside>
+        <p>{{selectedNote.content}}</p>
+      </aside> 
+      </template>
+    </main>
+   </div>
+   <script src="scripts/markdown.js"></script>
+  </body>
+</html>
